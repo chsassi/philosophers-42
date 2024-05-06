@@ -39,16 +39,16 @@ int	ft_atoi(char *s)
 int	parse_args(int ac, char **av)
 {
 	int		i;
-	t_philo	*ptr;
 
-	ptr = NULL;
 	i = 0;
-	if (ac == 5 || ac == 6)
+	if (ac < 5 || ac > 6)
+		return (print_error(INVALID_ARGS));
+	else if (ac == 5 || ac == 6)
 	{
 		while (av[i])
 		{
 			if (ft_atoi(av[i]) <= 0)
-				return (0);
+				return (print_error(INVALID_PARSING));
 			i++;
 		}
 	}
@@ -64,7 +64,15 @@ int	get_ms(int n)
 	return (n);
 }
 
-// void	*philo_routine(void *var)
-// {
-	
-// }
+int	print_error(t_error error_type)
+{
+	if (error_type == INVALID_PARSING)
+		printf("Error in parsing.\n");
+	else if (error_type == INVALID_ARGS)
+		printf("Run with ./philo [philos' number], [time to die], [time to eat] [time to sleep], [number of times]\n");
+	else if (error_type == ROOM_INIT)
+		printf("Error in struct's initialization.\n");
+	else if (error_type == PHILO_ALLOC)
+		printf("Error in philo allocation.\n");
+	return (0);
+}

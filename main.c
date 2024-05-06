@@ -14,12 +14,13 @@
 
 int	main(int ac, char **av)
 {
-	t_room	*room;
+	// t_room	*room;
+	// t_philo	*philo;
 
-	room = NULL;
-	if (!parse_args(ac, av))
-		return (0);
-	init_room(room, ac, av);
+	// room = NULL;
+	// philo = NULL;
+	parse_args(ac, av);
+	//init_philos(philo, ac, av);
 }
 
 // typedef struct x

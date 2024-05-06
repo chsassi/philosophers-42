@@ -14,38 +14,32 @@
 
 t_room	*init_room(t_room *pRoom, int ac, char **av)
 {
-	int	tmp;
-
-	pRoom->philo->id = 0;
 	pRoom->philos_nbr = ft_atoi(av[1]);
 	pRoom->philo = (t_philo *)malloc(sizeof(t_philo) * pRoom->philos_nbr);
 	if (!pRoom->philo)
 		return (0);
-	tmp = pRoom->philos_nbr;
-	while (tmp > 0)
-	{
-		pRoom->philo[pRoom->philo->id].time_to_die = ft_atoi(av[2]);
-		pRoom->philo[pRoom->philo->id].time_to_eat = ft_atoi(av[3]);
-		pRoom->philo[pRoom->philo->id].time_to_sleep = ft_atoi(av[4]);
-		if (ac == 6)
-			pRoom->philo[pRoom->philo->id].must_eat = ft_atoi(av[5]);
-		pRoom->philo[pRoom->philo->id].alive = true;
-		pRoom->philo[pRoom->philo->id].id++;
-		tmp--;
-	}
+	pRoom->time_to_die = ft_atoi(av[2]);
+	pRoom->time_to_eat = ft_atoi(av[3]);
+	pRoom->time_to_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+		pRoom->must_eat = ft_atoi(av[5]);
 	return (pRoom);
 }
 
-int	create_philos(t_room *pRoom, int ac, char **av)
-{
-	int		len;
+// int	init_philos(t_philo *pPhilo, int ac, char **av)
+// {
+// 	int		len;
+// 	t_room	*room;
 
-	len = pRoom->philos_nbr;
-	pRoom = init_room(pRoom, ac, av);
-	while (len >= 0)
-	{
-		pthread_create(&pRoom, NULL, &philo_routine, NULL);
-		len--;
-	}
-	return (0);
-}
+// 	room = NULL;
+// 	room = init_room(room, ac, av);
+// 	if (!room)
+// 		return (ROOM_INIT);
+// 	len = room->philos_nbr;
+// 	while (len >= 0)
+// 	{
+// 		pthread_create(&pPhilo, NULL, &philo_routine, NULL);
+// 		len--;
+// 	}
+// 	return (1);
+// }
