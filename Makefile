@@ -1,7 +1,7 @@
 NAME = philo
 
 CC = cc
-CFLAGS = -Wextra -Werror -Wall -g
+CFLAGS = -Wextra -Werror -Wall -g  -pthread
 COMPILE = $(CC) $(CFLAGS) -c
 ARCHIVE = ar rc $(NAME)
 
@@ -20,7 +20,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -I. $(OBJ) -o $(NAME)
-	@echo "$(GREEN)	PHILOSOPHERS COMPILED! ✅$(RESET)"
+	@echo "$(GREEN)	PHILOSOPHERS COMPILED!$(RESET)"
 
 RM = rm -f
 
