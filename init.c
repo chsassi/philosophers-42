@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chsassi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 17:28:03 by chsassi           #+#    #+#             */
+/*   Updated: 2024/05/06 17:28:07 by chsassi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 t_room	*init_room(t_room *pRoom, int ac, char **av)
@@ -30,10 +42,10 @@ int	create_philos(t_room *pRoom, int ac, char **av)
 	int		len;
 
 	len = pRoom->philos_nbr;
-	init_room(&pRoom, ac, av);
+	pRoom = init_room(pRoom, ac, av);
 	while (len >= 0)
 	{
-		pthread_create(&pRoom->philo, NULL, &philo_routine, NULL);
+		pthread_create(&pRoom, NULL, &philo_routine, NULL);
 		len--;
 	}
 	return (0);

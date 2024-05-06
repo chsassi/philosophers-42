@@ -12,6 +12,7 @@ YELLOW=\033[0;33m
 RESET=\033[0m
 
 SRC =	./utils.c \
+		./init.c \
 		./main.c
 
 OBJ = $(SRC:.c=.o)
