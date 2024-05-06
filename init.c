@@ -15,9 +15,8 @@
 t_room	*init_room(t_room *pRoom, int ac, char **av)
 {
 	int	tmp;
-	int	i;
 
-	i = 0;
+	pRoom->philo->id = 0;
 	pRoom->philos_nbr = ft_atoi(av[1]);
 	pRoom->philo = (t_philo *)malloc(sizeof(t_philo) * pRoom->philos_nbr);
 	if (!pRoom->philo)
@@ -25,13 +24,13 @@ t_room	*init_room(t_room *pRoom, int ac, char **av)
 	tmp = pRoom->philos_nbr;
 	while (tmp > 0)
 	{
-		pRoom->philo[i].time_to_die = ft_atoi(av[2]);
-		pRoom->philo[i].time_to_eat = ft_atoi(av[3]);
-		pRoom->philo[i].time_to_sleep = ft_atoi(av[4]);
+		pRoom->philo[pRoom->philo->id].time_to_die = ft_atoi(av[2]);
+		pRoom->philo[pRoom->philo->id].time_to_eat = ft_atoi(av[3]);
+		pRoom->philo[pRoom->philo->id].time_to_sleep = ft_atoi(av[4]);
 		if (ac == 6)
-			pRoom->philo[i].must_eat = ft_atoi(av[5]);
-		pRoom->philo[i].alive = true;
-		i++;
+			pRoom->philo[pRoom->philo->id].must_eat = ft_atoi(av[5]);
+		pRoom->philo[pRoom->philo->id].alive = true;
+		pRoom->philo[pRoom->philo->id].id++;
 		tmp--;
 	}
 	return (pRoom);
