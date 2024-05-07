@@ -26,6 +26,7 @@ typedef enum	e_error
 	INVALID_PARSING,
 	INVALID_ARGS,
 	PHILO_ALLOC,
+	THREAD_ERROR,
 	ROOM_INIT
 }	t_error;
 
@@ -33,10 +34,10 @@ typedef struct	s_room t_room;
 
 typedef struct	s_philo
 {
-	pthread_t	*thread_id;
-	int 		id;
-	bool		alive;
-	t_room		*room;
+	pthread_t	id;
+	int			philo_index;
+	int			last_meal;
+	t_room		*room_ptr;
 }	t_philo;
 
 typedef struct	s_room
@@ -53,8 +54,8 @@ typedef struct	s_room
 
 /* Init */
 
-t_room	*init_room(t_room *pRoom, int ac, char **av);
-int		init_philos(t_philo *pPhilo, int ac, char **av);
+void	init_room(t_room *pRoom, int ac, char **av);
+void	init_philos(t_room *pRoom);
 
 /* Utils */
 

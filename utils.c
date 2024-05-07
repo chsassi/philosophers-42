@@ -19,6 +19,7 @@ int	ft_atoi(char *s)
 	int	n;
 
 	i = 0;
+	n = 0;
 	sign = 1;
 	while (s[i] <= 32)
 		i++;
@@ -40,15 +41,15 @@ int	parse_args(int ac, char **av)
 {
 	int		i;
 
-	i = 0;
-	if (ac < 5 || ac > 6)
-		return (print_error(INVALID_ARGS));
-	else if (ac == 5 || ac == 6)
+	i = 1;
+	if (ac < 6 || ac > 7)
+		return (print_error(INVALID_ARGS), 0);
+	else if (ac == 6 || ac == 7)
 	{
 		while (av[i])
 		{
 			if (ft_atoi(av[i]) <= 0)
-				return (print_error(INVALID_PARSING));
+				return (print_error(INVALID_PARSING), 0);
 			i++;
 		}
 	}
@@ -74,5 +75,7 @@ int	print_error(t_error error_type)
 		printf("Error in struct's initialization.\n");
 	else if (error_type == PHILO_ALLOC)
 		printf("Error in philo allocation.\n");
+	else if (error_type == THREAD_ERROR)
+		printf("Error in thread creation.\n");
 	return (0);
 }

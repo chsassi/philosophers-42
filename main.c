@@ -14,12 +14,14 @@
 
 int	main(int ac, char **av)
 {
-	// t_room	*room;
-	// t_philo	*philo;
+	t_room	room;
+	t_philo	*philo;
 
-	// room = NULL;
-	// philo = NULL;
-	parse_args(ac, av);
+	philo = NULL;
+	room = (t_room){0};
+	if (!parse_args(ac, av))
+		return (0);
+	init_room(&room, ac, av);
 	//init_philos(philo, ac, av);
 }
 
