@@ -42,16 +42,20 @@ int	parse_args(int ac, char **av)
 	int		i;
 
 	i = 1;
-	if (ac < 6 || ac > 7)
+	if (ac < 5 || ac > 6)
 		return (print_error(INVALID_ARGS), 0);
-	else if (ac == 6 || ac == 7)
+	while (av[i])
 	{
-		while (av[i])
+		if (i == 5)
 		{
-			if (ft_atoi(av[i]) <= 0)
+			if (ft_atoi(av[i]) < 0)
 				return (print_error(INVALID_PARSING), 0);
-			i++;
 		}
+		if (ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60
+			|| ft_atoi(av[3])  < 60 || ft_atoi(av[4]) < 60
+			|| ft_atoi(av[i]) <= 0)
+				return (print_error(INVALID_PARSING), 0);
+		i++;
 	}
 	return (1);
 }
