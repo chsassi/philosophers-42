@@ -14,8 +14,6 @@
 
 void	init_room(t_room *pRoom, int ac, char **av)
 {
-	// pRoom = (t_room *){0};
-	// pRoom->philo = (t_room *)malloc(sizeof(t_room) * ft_atoi(av[1]));
 	pRoom->philos_nbr = ft_atoi(av[1]);
 	pRoom->philo = (t_philo *)malloc(sizeof(t_philo) * pRoom->philos_nbr);
 	if (!pRoom->philo)
@@ -33,11 +31,28 @@ void	init_room(t_room *pRoom, int ac, char **av)
 		pRoom->must_eat = ft_atoi(av[5]);
 }
 
-void	*philo_routine(void *var)
+int	assign_forks(t_room *pRoom, int i)
 {
-	(void)var;
-	printf("Isso boa");
-	return (0);
+	int	check;
+
+	if (i == pRoom->philos_nbr - 1)
+	{
+		check = pthread_mutex_init(&pRoom->forks[i], NULL);
+		if (check == -1)
+			return (0);
+		pRoom->philo[i].r_fork = &pRoom->forks[i];
+		pRoom->philo[i].l_fork = &pRoom->forks[0];
+		return (1);
+	}
+	check = pthread_mutex_init(&pRoom->forks[i], NULL);
+	if (check == -1)
+		return (0);
+	check = pthread_mutex_init(&pRoom->forks[i + 1], NULL);
+	if (check == -1)
+		return (0);
+	pRoom->philo[i].r_fork = &pRoom->forks[i];
+	pRoom->philo[i].l_fork = &pRoom->forks[i + 1];
+	return (1);
 }
 
 void	init_philos(t_room *pRoom)
@@ -51,15 +66,16 @@ void	init_philos(t_room *pRoom)
 	len = pRoom->philos_nbr;
 	while (len >= 0)
 	{
+		pRoom->philo[i].philo_index = i + 1;
+		pRoom->philo[i].last_meal = 0;
+		pRoom->philo[i].room_ptr = pRoom;
+		assign_fork(pRoom, i);
 		check = pthread_create(&pRoom->philo->id, NULL, &philo_routine, NULL);
 		if (check != 0)
 		{
 			print_error(THREAD_ERROR);
 			return ;
 		}
-		pRoom->philo[i].philo_index = i;
-		pRoom->philo[i].last_meal = 0;
-		pRoom->philo[i].room_ptr = pRoom;
 		i++;
 		len--;
 	}

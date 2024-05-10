@@ -21,6 +21,15 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+typedef enum	e_action
+{
+	TOOK_FORK,
+	EATING,
+	SLEEPING,
+	THINKING,
+	DEAD
+}	t_action;
+
 typedef enum	e_error
 {
 	INVALID_PARSING,
@@ -34,16 +43,19 @@ typedef struct	s_room t_room;
 
 typedef struct	s_philo
 {
-	pthread_t	id;
-	int			philo_index;
-	int			last_meal;
-	t_room		*room_ptr;
+	pthread_t		id;
+	int				philo_index;
+	int				last_meal;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
+	t_room			*room_ptr;
 }	t_philo;
 
 typedef struct	s_room
 {
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	print;
 	int				philos_nbr;
 	int				eat_count;
 	int				time_to_die;
@@ -57,12 +69,15 @@ typedef struct	s_room
 void	init_room(t_room *pRoom, int ac, char **av);
 void	init_philos(t_room *pRoom);
 
+/* Routine */
+void	*philo_routine(void *var);
+
 /* Utils */
 
 int		ft_atoi(char *s);
 int		get_ms(int n);
 int		parse_args(int ac, char **av);
-void	*philo_routine(void *var);
+int		print_action(t_action action_type);
 int		print_error(t_error error_type);
 
 #endif

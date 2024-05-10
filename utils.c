@@ -69,6 +69,21 @@ int	get_ms(int n)
 	return (n);
 }
 
+int	print_action(t_action action_type, t_room *pRoom)
+{
+	if (action_type == EATING)
+		printf("Philo %i is eating.\n", pRoom->philo->philo_index);
+	else if (action_type == SLEEPING)
+		printf("Philo %i is sleeping.\n", pRoom->philo->philo_index);
+	else if (action_type == THINKING)
+		printf("Philo %i is thinking.\n", pRoom->philo->philo_index);
+	else if (action_type == DEAD)
+		printf("Philo %i died.\n", pRoom->philo->philo_index);
+	else if (action_type == TOOK_FORK)
+		printf("Philo %i took the fork.\n", pRoom->philo->philo_index);
+	return (0);
+}
+
 int	print_error(t_error error_type)
 {
 	if (error_type == INVALID_PARSING)
