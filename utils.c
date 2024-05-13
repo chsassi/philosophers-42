@@ -60,12 +60,14 @@ int	parse_args(int ac, char **av)
 	return (1);
 }
 
-int	get_ms(int n)
+unsigned long	get_ms(void)
 {
+	unsigned long	n;
 	struct timeval	tv;
 
 	n = gettimeofday(&tv, 0);
-	n = (tv.tv_sec * 1000);
+	n = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	printf("%lu", n);
 	return (n);
 }
 

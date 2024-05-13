@@ -66,18 +66,21 @@ typedef struct	s_room
 
 /* Init */
 
-void	init_room(t_room *pRoom, int ac, char **av);
-void	init_philos(t_room *pRoom);
+void			init_room(t_room *pRoom, int ac, char **av);
+int				assign_forks(t_room *pRoom, int i);
+void			init_philos(t_room *pRoom);
 
 /* Routine */
-void	*philo_routine(void *var);
+
+int				start_eating(t_room *pRoom);
+void			*philo_routine(void *var);
 
 /* Utils */
 
-int		ft_atoi(char *s);
-int		get_ms(int n);
-int		parse_args(int ac, char **av);
-int		print_action(t_action action_type);
-int		print_error(t_error error_type);
+int				ft_atoi(char *s);
+unsigned long	get_ms(void);
+int				parse_args(int ac, char **av);
+int				print_action(t_action action_type, t_room *pRoom);
+int				print_error(t_error error_type);
 
 #endif

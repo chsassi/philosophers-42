@@ -12,17 +12,18 @@
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+int	main(void)
 {
-	t_room	room;
-	t_philo	*philo;
+	// t_room	room;
+	// t_philo	*philo;
 
-	philo = NULL;
-	room = (t_room){0};
-	if (!parse_args(ac, av))
-		return (0);
-	init_room(&room, ac, av);
-	//init_philos(philo, ac, av);
+	// philo = NULL;
+	// room = (t_room){0};
+	// if (!parse_args(ac, av))
+	// 	return (0);
+	// init_room(&room, ac, av);
+	// init_philos(&room);
+	get_ms();
 }
 
 // typedef struct x

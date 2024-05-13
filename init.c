@@ -69,7 +69,7 @@ void	init_philos(t_room *pRoom)
 		pRoom->philo[i].philo_index = i + 1;
 		pRoom->philo[i].last_meal = 0;
 		pRoom->philo[i].room_ptr = pRoom;
-		assign_fork(pRoom, i);
+		assign_forks(pRoom, i);
 		check = pthread_create(&pRoom->philo->id, NULL, &philo_routine, NULL);
 		if (check != 0)
 		{
@@ -79,4 +79,5 @@ void	init_philos(t_room *pRoom)
 		i++;
 		len--;
 	}
+	pthread_join(pRoom->philo->id, NULL);
 }
