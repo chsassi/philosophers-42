@@ -51,7 +51,6 @@ int	assign_forks(t_room *pRoom)
 			pRoom->philo[i].r_fork = -1;
 			break ;
 		}
-		i++;
 	}
 	return (1);
 }

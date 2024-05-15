@@ -25,20 +25,20 @@ void	eating(t_philo *philo)
 	philo->is_eating = 1;
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->mutex_philo);
-	usleep(philo->room_ptr->time_to_eat * 1000);
 	philo->last_meal = get_milliseconds() - philo->room_ptr->start_time;
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(EATING, philo);
-	philo->is_eating = 1;
+	philo->is_eating = 0;
 	pthread_mutex_unlock(&philo->room_ptr->print);
+	usleep(philo->room_ptr->time_to_eat * 1000);
 }
 
 void	sleeping(t_philo *philo)
 {
-	usleep(philo->room_ptr->time_to_sleep * 1000);
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(SLEEPING, philo);
 	pthread_mutex_unlock(&philo->room_ptr->print);
+	usleep(philo->room_ptr->time_to_sleep * 1000);
 }
 
 void	thinking(t_philo *philo)

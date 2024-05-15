@@ -12,54 +12,66 @@
 
 #include "philo.h"
 
-int	check_philos(t_room *room)
+int	check_task(t_room *pRoom)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	pthread_mutex_lock(&pRoom->philo[i].mutex_philo);
+	if (pRoom->philo[i].eat_count == pRoom->must_eat)
+	{
+		pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
+		if (count == pRoom->philos_nbr)
+			return (EXIT_LOOP);
+		count++;
+	}
+	pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
+	return (0);
+}
+
+int	check_philos(t_room *pRoom)
 {
 	int	philos_nbr;
-	int	must_eat;
 	int	i;
 
-	philos_nbr = room->philos_nbr;
-	must_eat = 0;
+	philos_nbr = pRoom->philos_nbr;
 	i = 0;
 	while (philos_nbr)
 	{
-		pthread_mutex_lock(&room->philo[i].mutex_philo);
-		room->time = (get_milliseconds() - room->start_time) \
-		 - room->philo[i].last_meal;
-		pthread_mutex_unlock(&room->philo[i].mutex_philo);
-		if (room->time >= room->time_to_die)
+		pthread_mutex_lock(&pRoom->philo[i].mutex_philo);
+		pRoom->time = (get_milliseconds() - pRoom->start_time) \
+		- pRoom->philo[i].last_meal;
+		pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
+		if (pRoom->time >= pRoom->time_to_die)
 		{
-			room->death = 1;
-			death(&room->philo[i]);
+			death(&pRoom->philo[i]);
+			pRoom->death = 1;
 			return (0);
 		}
-		pthread_mutex_lock(&room->philo[i].mutex_philo);
-		if (room->philo[i].eat_count == must_eat)
-		{
-			pthread_mutex_unlock(&room->philo[i].mutex_philo);
-			break ;
-		}
-		pthread_mutex_unlock(&room->philo[i].mutex_philo);
+		if (pRoom->must_eat && check_task(pRoom) == EXIT_LOOP)
+			return (0);
 		i++;
 	}
 	return (1);
 }
 
-void	room_routine(t_room *room)
+void	room_routine(t_room *pRoom)
 {
 	int	i;
 	int	must_eat;
 
 	i = 0;
-	must_eat = room->must_eat;
+	must_eat = pRoom->must_eat;
 	while (42)
 	{
-		if (!check_philos(room))
+		if (!check_philos(pRoom))
 			break ;
 	}
-	while (i < room->philos_nbr)
+	while (i < pRoom->philos_nbr)
 	{
-		pthread_join(room->philo[i].id, NULL);
+		pthread_join(pRoom->philo[i].id, NULL);
 		i++;
 	}
 }

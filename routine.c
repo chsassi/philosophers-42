@@ -16,7 +16,7 @@ int	do_action(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->room_ptr->forks[philo->r_fork]));
 	took_fork(philo);
-	if (!&philo->room_ptr->forks[philo->l_fork])
+	if (philo->l_fork == -1)
 	{
 		usleep(philo->room_ptr->time_to_die);
 		death(philo);
@@ -32,13 +32,13 @@ int	do_action(t_philo *philo)
 	thinking(philo);
 	pthread_mutex_lock(&philo->mutex_philo);
 	if (philo->room_ptr->death == 1
-		|| &philo->room_ptr->must_eat == &philo->eat_count)
+		|| philo->room_ptr->must_eat == philo->eat_count)
 	{
 		pthread_mutex_unlock(&philo->mutex_philo);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->mutex_philo);
-	return (1);
+	return (0);
 }
 
 void	*philo_routine(void *var)

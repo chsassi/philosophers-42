@@ -37,6 +37,7 @@ typedef enum e_error
 	PHILO_ALLOC,
 	THREAD_ERROR,
 	MUTEX_ERROR,
+	EXIT_LOOP,
 	ROOM_INIT
 }	t_error;
 
