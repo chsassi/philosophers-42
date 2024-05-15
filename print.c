@@ -17,7 +17,7 @@ int	print_action(t_action action_type, t_philo *philo)
 	long	time;
 
 	time = get_time(philo);
-	if (!check_print(philo))
+	if (action_type != DEAD && !check_print(philo))
 		return (1);
 	if (action_type == EATING)
 		printf("\e[0;31m[%li] philo %i is eating.\e[0m\n", \
@@ -56,7 +56,7 @@ int	check_print(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutex_philo);
 	if (philo->room_ptr->death == 1
-		|| philo->room_ptr->must_eat == philo->eat_count)
+		|| (philo->room_ptr->must_eat && philo->room_ptr->must_eat == philo->eat_count))
 	{
 		pthread_mutex_unlock(&philo->mutex_philo);
 		return (0);

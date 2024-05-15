@@ -25,4 +25,5 @@ int	main(int ac, char **av)
 		return (0);
 	room_routine(&room);
 	free_all(&room);
+	return (0);
 }

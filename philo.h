@@ -48,10 +48,9 @@ typedef struct s_philo
 	int				philo_index;
 	int				l_fork;
 	int				r_fork;
-	int				last_meal;
+	long			last_meal;
 	int				is_eating;
 	int				eat_count;
-	int				status;
 	pthread_mutex_t	mutex_philo;
 	t_room			*room_ptr;
 }	t_philo;
@@ -65,6 +64,7 @@ typedef struct s_room
 	int				must_eat;
 	long			start_time;
 	int				time;
+	int				count;
 	int				death;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
@@ -84,11 +84,6 @@ int		init_room(t_room *pRoom, int ac, char **av);
 int		init_philos(t_room *pRoom);
 int		init(t_room *room, int ac, char **av);
 
-// Print
-
-int		count_figures(long nb);
-char	*ft_itoa(int nb);
-
 // Routine
 
 void	*philo_routine(void *var);
@@ -107,7 +102,11 @@ void	death(t_philo *philo);
 int		ft_atoi(char *s);
 long	get_time(t_philo *philo);
 long	get_milliseconds(void);
+void	custom_sleep(int time_to_action);
 int		parse_args(int ac, char **av);
+
+// Print
+
 int		print_action(t_action action_type, t_philo *philo);
 int		print_error(t_error error_type);
 int		check_print(t_philo *philo);

@@ -21,16 +21,16 @@ void	took_fork(t_philo *philo)
 
 void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->mutex_philo);
-	philo->is_eating = 1;
-	philo->eat_count++;
-	pthread_mutex_unlock(&philo->mutex_philo);
-	philo->last_meal = get_milliseconds() - philo->room_ptr->start_time;
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(EATING, philo);
-	philo->is_eating = 0;
+	philo->is_eating = 1;
 	pthread_mutex_unlock(&philo->room_ptr->print);
-	usleep(philo->room_ptr->time_to_eat * 1000);
+	pthread_mutex_lock(&philo->mutex_philo);
+	philo->last_meal = get_milliseconds() - philo->room_ptr->start_time;
+	philo->is_eating = 0;
+	philo->eat_count++;
+	pthread_mutex_unlock(&philo->mutex_philo);
+	custom_sleep(philo->room_ptr->time_to_eat);
 }
 
 void	sleeping(t_philo *philo)
@@ -38,7 +38,7 @@ void	sleeping(t_philo *philo)
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(SLEEPING, philo);
 	pthread_mutex_unlock(&philo->room_ptr->print);
-	usleep(philo->room_ptr->time_to_sleep * 1000);
+	custom_sleep(philo->room_ptr->time_to_sleep);
 }
 
 void	thinking(t_philo *philo)

@@ -80,3 +80,17 @@ long	get_time(t_philo *philo)
 	time = get_milliseconds() - philo->room_ptr->start_time;
 	return (time);
 }
+
+void	custom_sleep(int time_to_action)
+{
+	long	time;
+	long	final_time;
+
+	time = get_milliseconds();
+	final_time = time + time_to_action;
+	while (time < final_time)
+	{
+		time = get_milliseconds();
+		usleep(50);
+	}
+}

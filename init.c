@@ -14,7 +14,7 @@
 
 int	init_room(t_room *pRoom, int ac, char **av)
 {
-	if (ac == 7)
+	if (ac == 6)
 		pRoom->must_eat = ft_atoi(av[5]);
 	pRoom->philos_nbr = ft_atoi(av[1]);
 	pRoom->time_to_die = ft_atoi(av[2]);
@@ -30,7 +30,6 @@ int	init_room(t_room *pRoom, int ac, char **av)
 		return (0);
 	}
 	pthread_mutex_init(&pRoom->print, NULL);
-	pthread_mutex_init(&pRoom->mutex_room, NULL);
 	return (1);
 }
 
@@ -43,11 +42,18 @@ int	assign_forks(t_room *pRoom)
 	last = pRoom->philos_nbr;
 	while (++i < last)
 	{
+		pRoom->philo[i] = (t_philo){0};
+		pthread_mutex_init(&pRoom->philo[i].mutex_philo, NULL);
 		pthread_mutex_init(&pRoom->forks[i], NULL);
 		pRoom->philo[i].r_fork = i;
 		pRoom->philo[i].l_fork = (i - 1 + last) % last;
 		if (pRoom->philos_nbr == 1)
-			pRoom->philo[i].r_fork = -1;
+			pRoom->philo[i].l_fork = -1;
+		if (i == last - 1)
+		{
+			pRoom->philo[i].l_fork = i;
+			pRoom->philo[i].r_fork = 0;
+		}
 	}
 	return (1);
 }
@@ -62,7 +68,6 @@ int	init_philos(t_room *pRoom)
 	while (i < pRoom->philos_nbr)
 	{
 		pRoom->philo[i].philo_index = i + 1;
-		pRoom->philo[i].last_meal = 0;
 		pRoom->philo[i].room_ptr = pRoom;
 		pthread_create(&pRoom->philo[i].id, NULL, \
 			philo_routine, &pRoom->philo[i]);

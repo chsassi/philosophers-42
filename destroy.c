@@ -15,15 +15,13 @@
 int	destroy_forks(t_room *room)
 {
 	int	i;
-	int	philos_nbr;
 
-	philos_nbr = room->philos_nbr;
 	i = 0;
-	while (philos_nbr > 0)
+	while (i < room->philos_nbr)
 	{
+		pthread_mutex_destroy(&room->philo[i].mutex_philo);
 		pthread_mutex_destroy(&room->forks[i]);
 		i++;
-		philos_nbr--;
 	}
 	return (1);
 }
