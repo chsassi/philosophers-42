@@ -84,13 +84,8 @@ long	get_time(t_philo *philo)
 void	custom_sleep(int time_to_action)
 {
 	long	time;
-	long	final_time;
 
 	time = get_milliseconds();
-	final_time = time + time_to_action;
-	while (time < final_time)
-	{
-		time = get_milliseconds();
-		usleep(50);
-	}
+	while (get_milliseconds() - time < time_to_action)
+		usleep(time_to_action / 10);
 }

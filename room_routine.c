@@ -32,22 +32,37 @@ int	check_task(t_room *pRoom)
 int	check_philos(t_room *pRoom)
 {
 	int	i;
+	int	time;
 
 	i = 0;
 	pRoom->count = 0;
+	time = get_milliseconds();
 	while (i < pRoom->philos_nbr)
 	{
 		pthread_mutex_lock(&pRoom->philo[i].mutex_philo);
-		pRoom->time = (get_milliseconds() - pRoom->start_time) \
-		- pRoom->philo[i].last_meal;
+		pRoom->time = (time - pRoom->start_time) - pRoom->philo[i].last_meal;
 		pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
-		if (pRoom->time > pRoom->time_to_die)
+		if (i % 2)
 		{
-			pthread_mutex_lock(&pRoom->mutex_room);
-			pRoom->death = 1;
-			pthread_mutex_unlock(&pRoom->mutex_room);
-			death(&pRoom->philo[i]);
-			return (0);
+			if (pRoom->time > pRoom->time_to_die + 1)
+			{
+				pthread_mutex_lock(&pRoom->mutex_room);
+				pRoom->death = 1;
+				pthread_mutex_unlock(&pRoom->mutex_room);
+				death(&pRoom->philo[i]);
+				return (0);
+			}
+		}
+		else
+		{
+			if (pRoom->time > pRoom->time_to_die)
+			{
+				pthread_mutex_lock(&pRoom->mutex_room);
+				pRoom->death = 1;
+				pthread_mutex_unlock(&pRoom->mutex_room);
+				death(&pRoom->philo[i]);
+				return (0);
+			}
 		}
 		if (pRoom->must_eat && check_task(pRoom))
 			return (0);

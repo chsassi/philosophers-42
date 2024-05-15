@@ -51,7 +51,7 @@ void	*philo_routine(void *var)
 
 	philo = (t_philo *)var;
 	if (!(philo->philo_index % 2))
-		usleep(1);
+		usleep(20);
 	while (42)
 	{
 		if (do_action(philo))

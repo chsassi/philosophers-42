@@ -26,7 +26,7 @@ void	eating(t_philo *philo)
 	philo->is_eating = 1;
 	pthread_mutex_unlock(&philo->room_ptr->print);
 	pthread_mutex_lock(&philo->mutex_philo);
-	philo->last_meal = get_milliseconds() - philo->room_ptr->start_time;
+	philo->last_meal = get_milliseconds();
 	philo->is_eating = 0;
 	philo->eat_count++;
 	pthread_mutex_unlock(&philo->mutex_philo);
