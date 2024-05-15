@@ -84,6 +84,11 @@ int		init_room(t_room *pRoom, int ac, char **av);
 int		init_philos(t_room *pRoom);
 int		init(t_room *room, int ac, char **av);
 
+// Print
+
+int		count_figures(long nb);
+char	*ft_itoa(int nb);
+
 // Routine
 
 void	*philo_routine(void *var);

@@ -59,13 +59,11 @@ int	assign_forks(t_room *pRoom)
 int	init_philos(t_room *pRoom)
 {
 	int		i;
-	int		len;
 
 	i = 0;
-	len = pRoom->philos_nbr;
 	pRoom->start_time = get_milliseconds();
 	assign_forks(pRoom);
-	while (len > 0)
+	while (i < pRoom->philos_nbr)
 	{
 		pRoom->philo[i].philo_index = i + 1;
 		pRoom->philo[i].last_meal = 0;
@@ -73,7 +71,6 @@ int	init_philos(t_room *pRoom)
 		pthread_create(&pRoom->philo[i].id, NULL, \
 			philo_routine, &pRoom->philo[i]);
 		i++;
-		len--;
 	}
 	return (1);
 }

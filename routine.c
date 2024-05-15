@@ -47,6 +47,8 @@ void	*philo_routine(void *var)
 
 	philo = (t_philo *)var;
 	pthread_mutex_init(&philo->mutex_philo, NULL);
+	if (!(philo->philo_index % 2))
+		usleep(10);
 	while (42)
 	{
 		if (do_action(philo))
