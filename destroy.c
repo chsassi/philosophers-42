@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chsassi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/01 18:45:09 by chsassi           #+#    #+#             */
+/*   Created: 2024/05/14 20:27:16 by chsassi           #+#    #+#             */
 /*   Updated: 2024/05/14 20:27:17 by chsassi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+int	destroy_forks(t_room *room)
 {
-	t_room	room;
-	t_philo	*philo;
+	int	i;
+	int	philos_nbr;
 
-	philo = NULL;
-	room = (t_room){0};
-	if (!parse_args(ac, av))
-		return (0);
-	if (!init(&room, ac, av))
-		return (0);
-	room_routine(&room);
-	free_all(&room);
+	philos_nbr = room->philos_nbr;
+	i = 0;
+	while (philos_nbr > 0)
+	{
+		pthread_mutex_destroy(&room->forks[i]);
+		i++;
+		philos_nbr--;
+	}
+	return (1);
+}
+
+void	free_all(t_room *room)
+{
+	pthread_mutex_destroy(&room->print);
+	pthread_mutex_destroy(&room->mutex_room);
+	destroy_forks(room);
+	free(room->forks);
+	free(room->philo);
 }

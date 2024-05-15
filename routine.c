@@ -1,32 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chsassi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/14 20:27:16 by chsassi           #+#    #+#             */
+/*   Updated: 2024/05/14 20:27:17 by chsassi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int	start_eating(t_room *pRoom)
+int	do_action(t_philo *philo)
 {
-
-	pthread_mutex_init(pRoom->forks, NULL);
-	pthread_mutex_init(&pRoom->print, NULL);
-	pthread_mutex_init(pRoom->forks, NULL);
-
-	// Guardare se le forchette a sx e a dx sono libere
-	// se sono libere mangi
-	print_action(EATING, pRoom);
-	return (0);
-
+	pthread_mutex_lock(&(philo->room_ptr->forks[philo->r_fork]));
+	took_fork(philo);
+	if (!&philo->room_ptr->forks[philo->l_fork])
+	{
+		usleep(philo->room_ptr->time_to_die);
+		death(philo);
+		pthread_mutex_unlock(&(philo->room_ptr->forks[philo->r_fork]));
+		return (1);
+	}
+	pthread_mutex_lock(&(philo->room_ptr->forks[philo->l_fork]));
+	took_fork(philo);
+	eating(philo);
+	pthread_mutex_unlock(&(philo->room_ptr->forks[philo->r_fork]));
+	pthread_mutex_unlock(&(philo->room_ptr->forks[philo->l_fork]));
+	sleeping(philo);
+	thinking(philo);
+	pthread_mutex_lock(&philo->mutex_philo);
+	if (philo->room_ptr->death == 1
+		|| &philo->room_ptr->must_eat == &philo->eat_count)
+	{
+		pthread_mutex_unlock(&philo->mutex_philo);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->mutex_philo);
+	return (1);
 }
 
 void	*philo_routine(void *var)
 {
-	t_room	*ptr;
+	t_philo	*philo;
 
-	(void)var;
-	ptr = NULL;
-	pthread_mutex_init(&ptr->print, NULL);
-	pthread_mutex_lock(&ptr->print);
-	pthread_mutex_unlock(&ptr->print);
-	start_eating(ptr);
-	// dormi
-	// pensi
-	// se muore, esci
-	return (0);
+	philo = (t_philo *)var;
+	pthread_mutex_init(&philo->mutex_philo, NULL);
+	while (42)
+	{
+		if (do_action(philo))
+			break ;
+	}
+	return (pthread_mutex_destroy(&philo->mutex_philo), NULL);
 }
-

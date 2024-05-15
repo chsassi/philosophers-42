@@ -11,10 +11,14 @@ BLUE=\033[0;34m
 YELLOW=\033[0;33m
 RESET=\033[0m
 
-SRC =	./utils.c \
-		./routine.c \
+SRC =	./main.c \
+		./actions.c \
+		./destroy.c \
 		./init.c \
-		./main.c
+		./print.c \
+		./room_routine.c \
+		./routine.c \
+		./utils.c
 
 OBJ = $(SRC:.c=.o)
 
