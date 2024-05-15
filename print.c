@@ -20,19 +20,19 @@ int	print_action(t_action action_type, t_philo *philo)
 	if (!check_print(philo))
 		return (1);
 	if (action_type == EATING)
-		printf("\e[0;31m%li, Philo %i is eating.\e[0m\n", \
+		printf("\e[0;31m[%li] philo %i is eating.\e[0m\n", \
 		time, philo->philo_index);
 	else if (action_type == SLEEPING)
-		printf("\e[0;32m%li, Philo %i is sleeping.\e[0m\n", \
+		printf("\e[0;32m[%li] philo %i is sleeping.\e[0m\n", \
 		time, philo->philo_index);
 	else if (action_type == THINKING)
-		printf("\e[0;34m%li, Philo %i is thinking.\e[0m\n", \
+		printf("\e[0;34m[%li] philo %i is thinking.\e[0m\n", \
 		time, philo->philo_index);
 	else if (action_type == DEAD)
-		printf("\e[0;36m%li, Philo %i died.\e[0m\n", \
+		printf("\e[0;36m[%li] philo %i died.\e[0m\n", \
 		time, philo->philo_index);
 	else if (action_type == TOOK_FORK)
-		printf("%li, Philo %i took a fork.\n", time, philo->philo_index);
+		printf("[%li] philo %i took a fork.\n", time, philo->philo_index);
 	return (0);
 }
 

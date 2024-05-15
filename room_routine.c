@@ -24,7 +24,7 @@ int	check_task(t_room *pRoom)
 	{
 		pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
 		if (count == pRoom->philos_nbr)
-			return (EXIT_LOOP);
+			return (1);
 		count++;
 	}
 	pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
@@ -50,7 +50,7 @@ int	check_philos(t_room *pRoom)
 			pRoom->death = 1;
 			return (0);
 		}
-		if (pRoom->must_eat && check_task(pRoom) == EXIT_LOOP)
+		if (pRoom->must_eat && check_task(pRoom))
 			return (0);
 		i++;
 	}

@@ -47,10 +47,7 @@ int	assign_forks(t_room *pRoom)
 		pRoom->philo[i].r_fork = i;
 		pRoom->philo[i].l_fork = (i - 1 + last) % last;
 		if (pRoom->philos_nbr == 1)
-		{
 			pRoom->philo[i].r_fork = -1;
-			break ;
-		}
 	}
 	return (1);
 }
