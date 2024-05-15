@@ -65,7 +65,7 @@ long	get_milliseconds(void)
 	long			n;
 	struct timeval	tv;
 
-	n = gettimeofday(&tv, 0);
+	n = gettimeofday(&tv, 0); // proteggrere
 	n = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (n);
 }

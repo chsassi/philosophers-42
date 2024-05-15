@@ -24,7 +24,7 @@ int	check_philos(t_room *room)
 	while (philos_nbr)
 	{
 		pthread_mutex_lock(&room->philo[i].mutex_philo);
-		room->time = get_milliseconds() - room->philo[i].last_meal;
+		room->time = (get_milliseconds() - room->start_time) - room->philo[i].last_meal;
 		pthread_mutex_unlock(&room->philo[i].mutex_philo);
 		if (room->time >= room->time_to_die)
 		{
@@ -55,5 +55,10 @@ void	room_routine(t_room *room)
 	{
 		if (!check_philos(room))
 			break ;
+	}
+	while (i < room->philos_nbr)
+	{
+		pthread_join(room->philo[i].id, NULL);
+		i++;
 	}
 }
