@@ -78,13 +78,10 @@ int	print_error(t_error error_type)
 
 int	check_print(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->mutex_philo);
+	pthread_mutex_lock(&philo->room_ptr->mutex_room);
 	if (philo->room_ptr->death == 1
 		|| (philo->room_ptr->must_eat && philo->room_ptr->must_eat == philo->eat_count))
-	{
-		pthread_mutex_unlock(&philo->mutex_philo);
-		return (0);
-	}
-	pthread_mutex_unlock(&philo->mutex_philo);
+		return (pthread_mutex_unlock(&philo->room_ptr->mutex_room), 0);
+	pthread_mutex_unlock(&philo->room_ptr->mutex_room);
 	return (1);
 }

@@ -49,11 +49,11 @@ int	assign_forks(t_room *pRoom)
 		pRoom->philo[i].l_fork = (i - 1 + last) % last;
 		if (pRoom->philos_nbr == 1)
 			pRoom->philo[i].l_fork = -1;
-		// if (i == last - 1)
-		// {
-		// 	pRoom->philo[i].l_fork = i;
-		// 	pRoom->philo[i].r_fork = 0;
-		// }
+		if (i == last - 1)
+		{
+			pRoom->philo[i].l_fork = i;
+			pRoom->philo[i].r_fork = (i - 1 + last) % last;
+		}
 	}
 	return (1);
 }
@@ -63,8 +63,8 @@ int	init_philos(t_room *pRoom)
 	int		i;
 
 	i = 0;
-	pRoom->start_time = get_milliseconds();
 	assign_forks(pRoom);
+	pRoom->start_time = get_milliseconds();
 	while (i < pRoom->philos_nbr)
 	{
 		pRoom->philo[i].philo_index = i + 1;
