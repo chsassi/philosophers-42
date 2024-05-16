@@ -34,14 +34,16 @@ int	do_action(t_philo *philo)
 		pthread_mutex_unlock(&philo->room_ptr->mutex_room);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->room_ptr->mutex_room);
+	else
+		pthread_mutex_unlock(&philo->room_ptr->mutex_room);
 	pthread_mutex_lock(&philo->mutex_philo);
 	if (philo->room_ptr->must_eat && philo->room_ptr->must_eat <= philo->eat_count)
 	{
 		pthread_mutex_unlock(&philo->mutex_philo);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->mutex_philo);
+	else
+		pthread_mutex_unlock(&philo->mutex_philo);
 	return (0);
 }
 
@@ -51,7 +53,7 @@ void	*philo_routine(void *var)
 
 	philo = (t_philo *)var;
 	if (!(philo->philo_index % 2))
-		usleep(20);
+		custom_sleep(10);
 	while (42)
 	{
 		if (do_action(philo))

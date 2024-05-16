@@ -23,12 +23,12 @@ void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(EATING, philo);
-	philo->is_eating = 1;
 	pthread_mutex_unlock(&philo->room_ptr->print);
 	pthread_mutex_lock(&philo->mutex_philo);
-	philo->last_meal = get_milliseconds();
-	philo->is_eating = 0;
+	philo->is_eating = 1;
+	philo->last_meal = get_milliseconds() - philo->room_ptr->start_time;
 	philo->eat_count++;
+	philo->is_eating = 0;
 	pthread_mutex_unlock(&philo->mutex_philo);
 	custom_sleep(philo->room_ptr->time_to_eat);
 }

@@ -25,7 +25,8 @@ int	check_task(t_room *pRoom)
 		if (pRoom->count == pRoom->philos_nbr)
 			return (1);
 	}
-	pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
+	else
+		pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
 	return (0);
 }
 
@@ -40,11 +41,11 @@ int	check_philos(t_room *pRoom)
 	while (i < pRoom->philos_nbr)
 	{
 		pthread_mutex_lock(&pRoom->philo[i].mutex_philo);
-		//pRoom->time = (time - pRoom->start_time) - pRoom->philo[i].last_meal;
+		pRoom->time = (time - pRoom->start_time) - pRoom->philo[i].last_meal;
 		pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
 		if (i % 2)
 		{
-			if (pRoom->time > pRoom->time_to_die + 1)
+			if (pRoom->time > pRoom->time_to_die + 10)
 			{
 				pthread_mutex_lock(&pRoom->mutex_room);
 				pRoom->death = 1;
