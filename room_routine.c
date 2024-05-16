@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   room_routine.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chsassi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: brulutaj <brulutaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:27:16 by chsassi           #+#    #+#             */
-/*   Updated: 2024/05/14 20:27:17 by chsassi          ###   ########.fr       */
+/*   Updated: 2024/05/16 11:05:11 by brulutaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_philos(t_room *pRoom)
 	while (i < pRoom->philos_nbr)
 	{
 		pthread_mutex_lock(&pRoom->philo[i].mutex_philo);
-		pRoom->time = (time - pRoom->start_time) - pRoom->philo[i].last_meal;
+		//pRoom->time = (time - pRoom->start_time) - pRoom->philo[i].last_meal;
 		pthread_mutex_unlock(&pRoom->philo[i].mutex_philo);
 		if (i % 2)
 		{

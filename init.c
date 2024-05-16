@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chsassi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: brulutaj <brulutaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 17:28:03 by chsassi           #+#    #+#             */
-/*   Updated: 2024/05/14 20:27:17 by chsassi          ###   ########.fr       */
+/*   Updated: 2024/05/16 10:59:45 by brulutaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int	assign_forks(t_room *pRoom)
 		pRoom->philo[i].l_fork = (i - 1 + last) % last;
 		if (pRoom->philos_nbr == 1)
 			pRoom->philo[i].l_fork = -1;
-		if (i == last - 1)
-		{
-			pRoom->philo[i].l_fork = i;
-			pRoom->philo[i].r_fork = 0;
-		}
+		// if (i == last - 1)
+		// {
+		// 	pRoom->philo[i].l_fork = i;
+		// 	pRoom->philo[i].r_fork = 0;
+		// }
 	}
 	return (1);
 }
