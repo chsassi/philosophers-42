@@ -72,6 +72,14 @@ typedef struct s_room
 	t_philo			*philo;
 }	t_room;
 
+// Actions
+
+void	took_fork(t_philo *philo);
+void	eating(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	thinking(t_philo *philo);
+void	death(t_philo *philo);
+
 // Destroy
 
 int		destroy_forks(t_room *room);
@@ -84,31 +92,30 @@ int		init_room(t_room *pRoom, int ac, char **av);
 int		init_philos(t_room *pRoom);
 int		init(t_room *room, int ac, char **av);
 
+// Room Routine
+
+int		check_odd(t_room *pRoom, int i);
+int		check_task(t_room *pRoom);
+int		check_philos(t_room *pRoom);
+void	room_routine(t_room *pRoom);
+
 // Routine
 
+int		do_action(t_philo *philo);
 void	*philo_routine(void *var);
-void	room_routine(t_room *room);
-
-// Actions
-
-void	took_fork(t_philo *philo);
-void	eating(t_philo *philo);
-void	sleeping(t_philo *philo);
-void	thinking(t_philo *philo);
-void	death(t_philo *philo);
-
-// Utils
-
-int		ft_atoi(char *s);
-long	get_time(t_philo *philo);
-long	get_milliseconds(void);
-void	custom_sleep(int time_to_action);
-int		parse_args(int ac, char **av);
 
 // Print
 
 int		print_action(t_action action_type, t_philo *philo);
 int		print_error(t_error error_type);
 int		check_print(t_philo *philo);
+
+// Utils
+
+int		ft_atoi(char *s);
+int		parse_args(int ac, char **av);
+long	get_time(t_philo *philo);
+long	get_milliseconds(void);
+void	custom_sleep(int time_to_action);
 
 #endif

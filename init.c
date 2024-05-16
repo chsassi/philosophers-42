@@ -47,13 +47,13 @@ int	assign_forks(t_room *pRoom)
 		pthread_mutex_init(&pRoom->forks[i], NULL);
 		pRoom->philo[i].r_fork = i;
 		pRoom->philo[i].l_fork = (i - 1 + last) % last;
-		if (pRoom->philos_nbr == 1)
-			pRoom->philo[i].l_fork = -1;
 		if (i == last - 1)
 		{
 			pRoom->philo[i].l_fork = i;
 			pRoom->philo[i].r_fork = (i - 1 + last) % last;
 		}
+		if (pRoom->philos_nbr == 1)
+			pRoom->philo[i].l_fork = -1;
 	}
 	return (1);
 }
