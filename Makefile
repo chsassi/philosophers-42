@@ -16,8 +16,8 @@ SRC =	./main.c \
 		./destroy.c \
 		./init.c \
 		./print.c \
+		./philo_routine.c \
 		./room_routine.c \
-		./routine.c \
 		./utils.c
 
 OBJ = $(SRC:.c=.o)

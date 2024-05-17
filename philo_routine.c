@@ -12,22 +12,22 @@
 
 #include "philo.h"
 
-int	do_action(t_philo *philo)
+int	make_action(t_philo *philo)
 {
 	pthread_mutex_lock(&(philo->room_ptr->forks[philo->r_fork]));
-	took_fork(philo);
+	p_take_fork(philo);
 	if (philo->l_fork == -1)
 	{
 		pthread_mutex_unlock(&(philo->room_ptr->forks[philo->r_fork]));
 		return (1);
 	}
 	pthread_mutex_lock(&(philo->room_ptr->forks[philo->l_fork]));
-	took_fork(philo);
-	eating(philo);
+	p_take_fork(philo);
+	p_eat(philo);
 	pthread_mutex_unlock(&(philo->room_ptr->forks[philo->r_fork]));
 	pthread_mutex_unlock(&(philo->room_ptr->forks[philo->l_fork]));
-	sleeping(philo);
-	thinking(philo);
+	p_sleep(philo);
+	p_think(philo);
 	pthread_mutex_lock(&philo->room_ptr->mutex_room);
 	if (philo->room_ptr->death == 1)
 		return (pthread_mutex_unlock(&philo->room_ptr->mutex_room), 1);
@@ -50,7 +50,7 @@ void	*philo_routine(void *var)
 		custom_sleep(5);
 	while (42)
 	{
-		if (do_action(philo))
+		if (make_action(philo))
 			break ;
 	}
 	return (NULL);

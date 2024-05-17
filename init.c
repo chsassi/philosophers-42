@@ -33,7 +33,7 @@ int	init_room(t_room *pRoom, int ac, char **av)
 	return (1);
 }
 
-int	assign_forks(t_room *pRoom)
+int	init_forks(t_room *pRoom)
 {
 	int	i;
 	int	last;
@@ -63,7 +63,7 @@ int	init_philos(t_room *pRoom)
 	int		i;
 
 	i = 0;
-	assign_forks(pRoom);
+	init_forks(pRoom);
 	pRoom->start_time = get_milliseconds();
 	while (i < pRoom->philos_nbr)
 	{

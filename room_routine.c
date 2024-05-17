@@ -63,7 +63,7 @@ int	check_philos(t_room *pRoom)
 			pthread_mutex_lock(&pRoom->mutex_room);
 			pRoom->death = 1;
 			pthread_mutex_unlock(&pRoom->mutex_room);
-			death(&pRoom->philo[i]);
+			p_death(&pRoom->philo[i]);
 			return (0);
 		}
 		if (pRoom->must_eat && check_task(pRoom))

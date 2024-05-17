@@ -14,8 +14,8 @@
 
 int	main(int ac, char **av)
 {
-	t_room	room;
 	t_philo	*philo;
+	t_room	room;
 
 	philo = NULL;
 	room = (t_room){0};

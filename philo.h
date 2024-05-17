@@ -74,11 +74,11 @@ typedef struct s_room
 
 // Actions
 
-void	took_fork(t_philo *philo);
-void	eating(t_philo *philo);
-void	sleeping(t_philo *philo);
-void	thinking(t_philo *philo);
-void	death(t_philo *philo);
+void	p_take_fork(t_philo *philo);
+void	p_eat(t_philo *philo);
+void	p_sleep(t_philo *philo);
+void	p_think(t_philo *philo);
+void	p_death(t_philo *philo);
 
 // Destroy
 
@@ -87,7 +87,7 @@ void	free_all(t_room *room);
 
 // Init
 
-int		assign_forks(t_room *pRoom);
+int		init_forks(t_room *pRoom);
 int		init_room(t_room *pRoom, int ac, char **av);
 int		init_philos(t_room *pRoom);
 int		init(t_room *room, int ac, char **av);
@@ -101,7 +101,7 @@ void	room_routine(t_room *pRoom);
 
 // Routine
 
-int		do_action(t_philo *philo);
+int		make_action(t_philo *philo);
 void	*philo_routine(void *var);
 
 // Print

@@ -12,14 +12,14 @@
 
 #include "philo.h"
 
-void	took_fork(t_philo *philo)
+void	p_take_fork(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(TOOK_FORK, philo);
 	pthread_mutex_unlock(&philo->room_ptr->print);
 }
 
-void	eating(t_philo *philo)
+void	p_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(EATING, philo);
@@ -33,7 +33,7 @@ void	eating(t_philo *philo)
 	custom_sleep(philo->room_ptr->time_to_eat);
 }
 
-void	sleeping(t_philo *philo)
+void	p_sleep(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(SLEEPING, philo);
@@ -41,14 +41,14 @@ void	sleeping(t_philo *philo)
 	custom_sleep(philo->room_ptr->time_to_sleep);
 }
 
-void	thinking(t_philo *philo)
+void	p_think(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(THINKING, philo);
 	pthread_mutex_unlock(&philo->room_ptr->print);
 }
 
-void	death(t_philo *philo)
+void	p_death(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->room_ptr->print);
 	print_action(DEAD, philo);
