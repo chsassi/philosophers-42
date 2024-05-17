@@ -16,11 +16,11 @@ int	ft_atoi(char *s)
 {
 	int	i;
 	int	sign;
-	int	n;
+	int	res;
 
 	i = 0;
-	n = 0;
 	sign = 1;
+	res = 0;
 	while (s[i] <= 32)
 		i++;
 	if (s[i] == '-' || s[i] == '+')
@@ -31,10 +31,10 @@ int	ft_atoi(char *s)
 	}
 	while (s[i] >= '0' && s[i] <= '9')
 	{
-		n = n * 10 + (s[i] - '0');
+		res = res * 10 + (s[i] - '0');
 		i++;
 	}
-	return (n * sign);
+	return (res * sign);
 }
 
 int	parse_args(int ac, char **av)

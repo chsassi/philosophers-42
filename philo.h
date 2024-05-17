@@ -82,8 +82,8 @@ void	p_death(t_philo *philo);
 
 // Destroy
 
-int		destroy_forks(t_room *room);
-void	free_all(t_room *room);
+int		destroy_forks(t_room *pRoom);
+void	free_all(t_room *pRoom);
 
 // Init
 
