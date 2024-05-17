@@ -12,30 +12,7 @@
 
 #include "philo.h"
 
-// int	print_action(t_action action_type, t_philo *philo)
-// {
-// 	long	time;
 
-// 	time = get_time(philo);
-// 	if (action_type != DEAD && !check_print(philo))
-// 		return (1);
-// 	if (action_type == EATING)
-// 		printf("%li %i is eating\n", \
-// 		time, philo->philo_index);
-// 	else if (action_type == SLEEPING)
-// 		printf("%li %i is sleeping\n", \
-// 		time, philo->philo_index);
-// 	else if (action_type == THINKING)
-// 		printf("%li %i is thinking\n", \
-// 		time, philo->philo_index);
-// 	else if (action_type == DEAD)
-// 		printf("%li %i died\n", \
-// 		time, philo->philo_index);
-// 	else if (action_type == TOOK_FORK)
-// 		printf("%li %i has taken a fork\n", \
-// 		time, philo->philo_index);
-// 	return (0);
-// }
 
 int	print_action(t_action action_type, t_philo *philo)
 {
