@@ -24,6 +24,7 @@ Attraverso questo progetto, imparerai:
 
 
 Evaluation: 100/100
+<img width="1282" alt="Screenshot 2024-11-07 at 17 35 46" src="https://github.com/user-attachments/assets/a5f614cf-26e8-40a2-8823-566d2a391397">
 
 ### Compilation:
 ```bash
